@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Random User</title>
+</head>
+<body>
+	<h1> Name: </h1>
+	<ul id="userId">
+		
+	</ul> 
+
+	<script type="text/javascript">		
+		function randomUser(){
+			fetch('https://randomuser.me/api/?results=20')
+				.then(res => res.json())
+				.then(data => {
+					const user = data.results;
+					//const name = user.name;
+					// const userName = `${name.title} ${name.first} ${name.last} `;
+					const allUser = [];
+					for(let i = 0; i < user.length; i++){
+						//console.log(user[i].name);
+						let singleUser = user[i].name;
+						let userFullName = `${singleUser.title} ${singleUser.first} ${singleUser.last}` ;
+						allUser.push(userFullName);
+					}
+					//console.log(newUserExtracted);
+					//let allUserList =  allUser.toString();
+					//let allUserList =  allUser.join(', ');										
+					for(let i = 0; i < allUser.length; i++){
+						let userItem = document.createElement('li');
+						userItem.innerText =  allUser[i];
+						document.getElementById('userId').appendChild(userItem);
+					}					
+				})
+				
+		}
+
+		randomUser();
+		// setInterval(() => {
+		// 	randomUser();
+		// }, 3000);
+	</script>
+</body>
+</html>
